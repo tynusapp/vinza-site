@@ -13,7 +13,7 @@
     <p>Política de Privacidade</p>
   </div></header>
   <main>
-    <p class="updated"><strong>Última atualização:</strong> 28 de junho de 2026.</p>
+    <p class="updated"><strong>Última atualização:</strong> 19 de agosto de 2026.</p>
     <p>Esta Política explica como o Vinza trata dados pessoais ao oferecer o aplicativo de organização de adega, leitura de rótulos, recomendações e ofertas. O Vinza atua como controlador dos dados descritos neste documento e pode ser contatado pelo e-mail <a href="mailto:privacidade@vinza.app">privacidade@vinza.app</a>.</p>
 
     <h2>1. Quem pode usar o Vinza</h2>
@@ -26,7 +26,7 @@
       <li><strong>Imagens:</strong> fotos de rótulos enviadas pela câmera ou galeria.</li>
       <li><strong>Perguntas e áudio:</strong> textos, ocasiões, orçamentos e gravações enviadas para transcrição e recomendação.</li>
       <li><strong>Uso e segurança:</strong> sessões de acesso, versão do aplicativo, registros técnicos, erros e cliques em ofertas.</li>
-      <li><strong>Analytics opcional:</strong> telas acessadas, origem de fluxos, categorias, contagens e status de ações, além de identificadores técnicos da instalação e do dispositivo gerados pelo Firebase. Não enviamos ao Analytics perguntas, nomes de bebidas, e-mail, fotos, áudio, códigos de barras ou notas pessoais.</li>
+      <li><strong>Analytics opcional:</strong> no aplicativo e no site, telas ou seções acessadas, origem de fluxos, categorias, contagens e status de ações, além de identificadores técnicos gerados pelo Firebase. Não enviamos ao Analytics perguntas, nomes de bebidas, e-mail, dados do formulário beta, fotos, áudio, códigos de barras ou notas pessoais.</li>
     </ul>
 
     <h2>3. Por que usamos esses dados</h2>
@@ -60,7 +60,7 @@
 
     <h2>7. Retenção e exclusão</h2>
     <p>Mantemos os dados enquanto sua conta estiver ativa ou pelo tempo necessário às finalidades informadas. Você pode excluir sua conta em <strong>Perfil → Excluir minha conta</strong>. A exclusão remove os dados do banco ativo e as fotos vinculadas. Cópias residuais em backups protegidos podem permanecer por até 30 dias, sem uso rotineiro, até sua expiração automática. Dados poderão ser conservados quando exigido por lei ou necessário ao exercício de direitos.</p>
-    <p>O Analytics começa desativado. Você pode habilitar ou desabilitar a qualquer momento em <strong>Perfil → Compartilhar dados de uso</strong>. Ao desabilitar, interrompemos novas coletas e redefinimos o identificador local do Analytics. Eventos agregados anteriormente poderão permanecer conforme a retenção configurada no GA4.</p>
+    <p>O Analytics começa desativado. No aplicativo, você pode habilitar ou desabilitar em <strong>Perfil → Compartilhar dados de uso</strong>. No site, a escolha aparece antes do carregamento do Analytics e pode ser revista em <strong>Preferências de cookies</strong>. Ao desabilitar, interrompemos novas coletas. Eventos agregados anteriormente poderão permanecer conforme a retenção configurada no GA4.</p>
 
     <h2>8. Seus direitos</h2>
     <p>Nos termos da LGPD, você pode solicitar confirmação de tratamento, acesso, correção, informação sobre compartilhamentos, oposição, portabilidade quando regulamentada, revogação de consentimento e anonimização, bloqueio ou eliminação quando aplicável. Envie a solicitação para <a href="mailto:privacidade@vinza.app">privacidade@vinza.app</a>. Poderemos pedir informações para confirmar sua identidade.</p>
@@ -75,6 +75,12 @@
     <p>Dúvidas ou solicitações sobre privacidade: <a href="mailto:privacidade@vinza.app">privacidade@vinza.app</a>.</p>
     <nav><a href="terms.html">Termos de Uso</a><a href="index.html">Voltar ao site</a></nav>
   </main>
-  <footer>© 2026 Vinza. Beba com responsabilidade.</footer>
+  <footer>© 2026 Vinza. Beba com responsabilidade. <button class="footer-preferences" type="button" data-analytics-preferences>Preferências de cookies</button></footer>
+  <aside class="consent-banner" data-consent-banner hidden aria-labelledby="consent-title">
+    <div><strong id="consent-title">Analytics opcional</strong><p>Podemos medir visitas e cliques para melhorar o Vinza. Nenhum dado do formulário é coletado pelo site.</p></div>
+    <div class="consent-actions"><button type="button" class="consent-decline" data-consent="denied">Agora não</button><button type="button" class="button" data-consent="granted">Aceitar Analytics</button></div>
+  </aside>
+  <script src="analytics-config.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
