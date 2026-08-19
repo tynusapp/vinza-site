@@ -21,6 +21,15 @@ document.querySelectorAll('[data-year]').forEach((node) => {
   node.textContent = new Date().getFullYear();
 });
 
+document.querySelectorAll('[data-analytics-event]').forEach((link) => {
+  link.addEventListener('click', () => {
+    if (typeof window.gtag !== 'function') return;
+    window.gtag('event', link.dataset.analyticsEvent, {
+      source: link.dataset.analyticsSource,
+    });
+  });
+});
+
 const revealItems = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const observer = new IntersectionObserver((entries) => {
