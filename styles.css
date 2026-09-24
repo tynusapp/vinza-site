@@ -38,6 +38,7 @@ img { display: block; max-width: 100%; }
 .button { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 18px; border: 0; border-radius: 14px; padding: 0 22px; background: var(--wine-700); color: white; font-size: 13px; font-weight: 700; box-shadow: 0 12px 30px rgb(114 40 63 / .2); transition: transform .2s ease, background .2s ease; }
 .button:hover { background: var(--wine-800); transform: translateY(-2px); }
 .button-small { min-height: 42px; padding-inline: 17px; box-shadow: none; }
+.availability-note { margin: 18px 0 0; color: var(--wine-700); font-size: 13px; line-height: 1.6; }
 
 .hero { position: relative; min-height: 820px; overflow: hidden; padding: 142px 0 88px; }
 .hero::before { position: absolute; inset: 0; background: radial-gradient(circle at 82% 20%, rgb(182 66 100 / .12), transparent 30%), radial-gradient(circle at 9% 92%, rgb(196 154 72 / .10), transparent 26%); content: ''; pointer-events: none; }
