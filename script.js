@@ -3,9 +3,13 @@ const navLinks = document.querySelector('.nav-links');
 const analyticsConfig = window.VINZA_ANALYTICS || {};
 const analyticsConfigured = /^G-[A-Z0-9]+$/i.test(analyticsConfig.measurementId || '');
 const consentKey = 'vinza_analytics_consent';
+let analyticsConsent = null;
+try {
+  analyticsConsent = localStorage.getItem(consentKey);
+} catch {}
 
 function hasAnalyticsConsent() {
-  return localStorage.getItem(consentKey) === 'granted';
+  return analyticsConsent === 'granted';
 }
 
 function loadAnalytics() {
@@ -26,8 +30,10 @@ function loadAnalytics() {
 
 function trackEvent(name, parameters = {}) {
   if (!hasAnalyticsConsent() || !analyticsConfigured) return;
-  loadAnalytics();
-  window.gtag('event', name, parameters);
+  try {
+    loadAnalytics();
+    window.gtag('event', name, parameters);
+  } catch {}
 }
 
 if (hasAnalyticsConsent()) loadAnalytics();
@@ -54,7 +60,7 @@ document.querySelectorAll('[data-year]').forEach((node) => {
 });
 
 const consentBanner = document.querySelector('[data-consent-banner]');
-if (consentBanner && analyticsConfigured && !localStorage.getItem(consentKey)) {
+if (consentBanner && analyticsConfigured && !analyticsConsent) {
   consentBanner.hidden = false;
 }
 
@@ -62,9 +68,16 @@ document.querySelectorAll('[data-consent]').forEach((button) => {
   button.addEventListener('click', () => {
     const consent = button.dataset.consent;
     const analyticsWasLoaded = window.vinzaAnalyticsLoaded;
-    localStorage.setItem(consentKey, consent);
+    analyticsConsent = consent;
+    try {
+      localStorage.setItem(consentKey, consent);
+    } catch {}
+    window[`ga-disable-${analyticsConfig.measurementId}`] = consent !== 'granted';
     if (consent === 'granted') {
       loadAnalytics();
+      if (window.vinzaAnalyticsLoaded) {
+        window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
       trackEvent('analytics_consent_updated', { enabled: true });
     } else if (analyticsWasLoaded) {
       window.gtag('consent', 'update', { analytics_storage: 'denied' });
@@ -108,6 +121,15 @@ document.querySelectorAll('[data-outbound-destination]').forEach((link) => {
   link.addEventListener('click', () => {
     trackEvent('site_outbound_clicked', {
       destination: link.dataset.outboundDestination,
+    });
+  });
+});
+
+document.querySelectorAll('[data-faq]').forEach((item) => {
+  item.addEventListener('toggle', () => {
+    trackEvent('site_faq_toggled', {
+      question: item.dataset.faq,
+      expanded: item.open,
     });
   });
 });

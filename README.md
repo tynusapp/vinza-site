@@ -2,6 +2,24 @@
 
 Landing page estática do Vinza, pronta para GitHub Pages.
 
+## Conteúdo do produto
+
+A página apresenta adega, Sommelier, Vinza Match e ofertas, além das novidades
+em testes internos: descobertas guiadas, diário, histórico e lembretes locais.
+As descobertas têm destaque próprio; os três guias mostrados são exemplos
+ilustrativos dos guias iniciais. O FAQ explica uso sem abrir garrafas, registros
+fora da adega, permissões dos lembretes e disponibilidade por versão.
+
+O site é estático: o painel **Gerenciar descobertas** do app altera o catálogo
+da API, mas não atualiza os cartões desta página. Ao mudar os exemplos ou a
+disponibilidade dos recursos, ajuste `index.html`. As descrições de dados e de
+funcionalidades também estão em `privacy.html` e `terms.html`.
+
+Eventos e parâmetros dos links, seções e FAQ estão em `ANALYTICS.md`.
+
+Para conferir localmente, execute `python3 -m http.server 8765` neste diretório
+e abra `http://localhost:8765`. Verifique a página em telas de celular e desktop.
+
 ## Publicação
 
 1. Publique estes arquivos na branch `main` do repositório `tynusapp/vinza-site`.
