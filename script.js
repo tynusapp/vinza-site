@@ -79,9 +79,11 @@ document.querySelectorAll('[data-consent]').forEach((button) => {
         window.gtag('consent', 'update', { analytics_storage: 'granted' });
       }
       trackEvent('analytics_consent_updated', { enabled: true });
+      startSectionTracking();
     } else if (analyticsWasLoaded) {
       window.gtag('consent', 'update', { analytics_storage: 'denied' });
     }
+    if (consent !== 'granted') sectionObserver?.disconnect();
     if (consentBanner) consentBanner.hidden = true;
   });
 });
@@ -150,13 +152,23 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
 }
 
 const trackedSections = document.querySelectorAll('main section[id]');
-if ('IntersectionObserver' in window) {
-  const sectionObserver = new IntersectionObserver((entries) => {
+const viewedSections = new Set();
+let sectionObserver;
+
+function startSectionTracking() {
+  if (!hasAnalyticsConsent() || !analyticsConfigured || !('IntersectionObserver' in window)) return;
+  sectionObserver ??= new IntersectionObserver((entries) => {
+    if (!hasAnalyticsConsent()) return;
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
+      if (!entry.isIntersecting || viewedSections.has(entry.target.id)) return;
       trackEvent('site_section_viewed', { section: entry.target.id });
+      viewedSections.add(entry.target.id);
       sectionObserver.unobserve(entry.target);
     });
   }, { threshold: 0.35 });
-  trackedSections.forEach((section) => sectionObserver.observe(section));
+  trackedSections.forEach((section) => {
+    if (!viewedSections.has(section.id)) sectionObserver.observe(section);
+  });
 }
+
+startSectionTracking();

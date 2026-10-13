@@ -7,6 +7,18 @@ desativa a propriedade no Google Analytics; um novo aceite restaura o
 consentimento. Se o navegador bloquear o armazenamento local, a escolha vale
 apenas para a visita atual e começa sem coleta na próxima visita.
 
+A observação das seções começa somente após o aceite. A seção que estiver
+visível nesse momento pode ser registrada; visualizações anteriores ao aceite
+não são recuperadas. Cada seção conta uma vez por página. Ao recusar, o
+observador é interrompido; um novo aceite observa somente as seções restantes.
+
+## Consentimento e navegação
+
+- `analytics_consent_updated`: aceite confirmado; `enabled: true`.
+- `site_menu_opened`: abre o menu mobile, sem parâmetros.
+- `site_legal_link_clicked`: documento aberto; `document`: `privacy` ou `terms`.
+- `site_outbound_clicked`: destino externo identificado; `destination`: `support_email`.
+
 ## Download para Android
 
 - `android_download_clicked`: clique para abrir o Google Play; `source` identifica `site_hero`, `site_discoveries` ou `site_download_section`. Substitui `beta_signup_clicked`.
@@ -25,3 +37,10 @@ Os cartões e a prévia do celular são ilustrações, sem ações de progresso 
 registro no diário. O site não recebe o catálogo administrativo da API.
 Não enviamos títulos de guias editados, comentários, registros ou outros textos
 livres ao Analytics. A medição continua condicionada ao consentimento.
+
+## Verificação
+
+Executar `node --test tests/analytics.test.cjs`. Os testes cobrem recusa,
+aceite tardio, repetição de consentimento, armazenamento bloqueado e ausência
+de configuração. Simulam as chamadas locais; confirmar entrega e configuração
+da propriedade no DebugView do GA4 antes de confiar nos relatórios.
