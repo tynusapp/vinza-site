@@ -32,6 +32,10 @@ O arquivo `CNAME` já contém o domínio e as páginas legais ficam disponíveis
 - `https://vinza.app/privacy.html`
 - `https://vinza.app/terms.html`
 
+O catálogo Maissa agora é hospedado na VPS em
+`https://catalogo.maissamansano.fst.br/`, com painel em `/admin`.
+O endereço antigo `https://vinza.app/catalogo/` encaminha para o novo domínio.
+
 ## Analytics do site
 
 1. No Firebase, adicione um app Web ao projeto do Vinza.
